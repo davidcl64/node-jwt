@@ -1,0 +1,21 @@
+{
+  "name": "token",
+  "version": "0.0.0",
+  "description": "Library to generate/validate security tokens",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": "",
+  "keywords": [
+    "token",
+    "jwt",
+    "oauth2"
+  ],
+  "author": "David Clarke",
+  "license": "MIT",
+  "dependencies": {
+    "jws": "~0.2.2",
+    "base64url": "0.0.4"
+  }
+}
