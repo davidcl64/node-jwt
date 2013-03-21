@@ -31,7 +31,7 @@ module.exports = {
         cb();
     },
     
-    "Basic JWT.build": function(test) {
+    "JWT.build  ==> Should SUCCEED  ==> Basic": function(test) {
         var self = this;
         test.expect(2);
         JWT.build(self.opts, function(error,result) {
@@ -41,7 +41,7 @@ module.exports = {
         });
     },
     
-    "JWT.build with Delay": function(test) {
+    "JWT.build  ==> Should SUCCEED  ==> with Delay": function(test) {
         var self = this;
         
         test.expect(4);
@@ -56,7 +56,7 @@ module.exports = {
         });
     },
     
-    "JWT.build with String Scope": function(test) {
+    "JWT.build  ==> Should SUCCEED  ==> with String Scope": function(test) {
         var self = this;
         test.expect(2);
         self.opts.scope = "This is a test";
@@ -68,7 +68,7 @@ module.exports = {
         });
     },
 
-    "JWT.build with String Scope & delimeter": function(test) {
+    "JWT.build  ==> Should SUCCEED  ==> with String Scope & delimeter": function(test) {
         var self = this;
         test.expect(2);
         self.opts.scope = "This,is,a,test";
