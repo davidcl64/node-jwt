@@ -3,6 +3,7 @@ var util       = require('util');
 var ALGORITHMS = jwt.ALGORITHMS;
 var JWT        = jwt.JWT;
 var base64url  = require('base64url');
+var config     = require('./config/config');
 
 module.exports = {
     setUp: function(cb) {
@@ -19,16 +20,14 @@ module.exports = {
         this._now     = Date.now;
         this._getTime = Date.prototype.getTime;
         
-        Date.now = function() { return 0; };
-        Date.prototype.getTime = function() { return 0; };
-        
+        Date.now = config.now;
+        Date.prototype.getTime = config.now;       
         cb();
     },
     
     tearDown: function(cb   ) {
         Date.now = this._now;
         Date.prototype.getTime = this._getTime;
-        
         cb();
     },
     
