@@ -4,7 +4,7 @@
   "description": "Library to generate/validate security tokens",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "nodeunit test"
   },
   "repository": "",
   "keywords": [
@@ -16,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "jws": "~0.2.2",
-    "base64url": "0.0.4"
+    "base64url": "0.0.4",
+    "nodeunit": "~0.7.4"
   }
 }
