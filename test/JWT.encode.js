@@ -338,4 +338,64 @@ module.exports = {
         runTests(this, config, function() { test.done(); });
     },
 
+    "JWT.encode ==> Should FAIL     ==> no refresh, with privateKey & secret & HS+bits": function(test) {
+        var self = this;
+        var config = {
+            build:  { cb: buildConfig(test, function(result) { return { header: ALGORITHMS.header(ALGORITHMS.HS256), payload: result, privateKey: helper.key, secret: helper.secret } }) },
+            encode: {
+                cb: function(error, result, detail) {
+                    test.ok(error, "Expected error, instead got: " + result);
+                }
+            }
+        };
+        
+        test.expect(3);
+        runTests(this, config, function() { test.done(); });
+    },
+    
+    "JWT.encode ==> Should FAIL     ==> no refresh, with privateKey & secret & RS+bits": function(test) {
+        var self = this;
+        var config = {
+            build:  { cb: buildConfig(test, function(result) { return { header: ALGORITHMS.header(ALGORITHMS.RS256), payload: result, privateKey: helper.key, secret: helper.secret } }) },
+            encode: {
+                cb: function(error, result, detail) {
+                    test.ok(error, "Expected error, instead got: " + result);
+                }
+            }
+        };
+        
+        test.expect(3);
+        runTests(this, config, function() { test.done(); });
+    },
+    
+    "JWT.encode ==> Should SUCCEED  ==> Building Refresh Tokens": function(test) {
+        var self = this;
+        var config = {
+            build:  { cb: buildConfig(test, function(result) { return { header: ALGORITHMS.header(ALGORITHMS.ES256), payload: result, privateKey: helper.key } }) },
+            encode: {
+                cb: function(error, result, detail) {
+                    test.equal(error,null,error);
+                
+                    test.equal(detail.parts.length, 3, "Encoded token should contain 3 parts not: " + detail.parts.length);
+                    test.ok((detail.parts[2] || '').length > 0, "Expected signature to be > zero: '" + detail.parts[2] + "'");
+                
+                    test.deepEqual(detail.json[0], { typ: 'JWT', cty: 'JWT', alg: 'ES256' }, "Unexpected header value: '" + detail.dparts[0] + "'");
+                
+                    test.deepEqual(detail.json[1], 
+                                   { iss: 'MyClientID',
+                                     aud: 'https://accounts.localhost.com/o/oauth2/token',
+                                     iat: -60,
+                                     exp: 3600,
+                                     scope: [ '1', '3', '5' ] }, 
+                                   "Unexpected payload value: '" + detail.dparts[1] + "'");
+                               }
+            }
+        }
+        
+        
+        console.log('\r\n!!!! ===> TODO: Build refresh tokens and test generation of access tokens under different time/scope scenarios\r\n')
+        test.done();
+        //test.expect(3);
+        //runTests(this, config, function() { test.done(); });
+    },
 }
