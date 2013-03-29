@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Library to generate/validate security tokens",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "nodeunit test"
   },
